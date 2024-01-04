@@ -14,6 +14,9 @@ class OrderDetail extends Pivot
 
     public $incrementing = true;
 
+    public $timestamps = false;
+
+
 
     public function product()
     {

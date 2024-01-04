@@ -5,11 +5,12 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 
 class Order extends Model
 {
     use HasFactory;
+
 
     protected $fillable = [
         'store_id',
@@ -17,6 +18,10 @@ class Order extends Model
         'payment_method',
         'status',
         'payment_stauts',
+        'shipping',
+        'tax',
+        'discount',
+        'total',
     ];
 
 
@@ -62,9 +67,9 @@ class Order extends Model
 
     public static function getNextOrderNumber()
     {
-
-        $year = Carbon::NOW()->year;
-        $number = Order::whereyear('created_at', $year)->mix('number');
+        // SELECT MAX(number) FROM orders
+        $year =  Carbon::now()->year;
+        $number = Order::whereYear('created_at', $year)->max('number');
         if ($number) {
             return $number + 1;
         }

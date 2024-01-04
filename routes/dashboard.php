@@ -5,7 +5,6 @@ use App\Http\Controllers\Dashboard\Ordercontroller;
 use App\Http\Controllers\Dashboard\Productcontroller;
 use App\Http\Controllers\Dashboard\profileController;
 use App\Http\Controllers\DashboardController;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,7 +17,9 @@ Route::group(['middleware' => ['auth', 'auth.user:admin,super-admin']], function
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::put('categories/{category_id}/restore', [CategoriesController::class, 'restore'])->name('categories.restore');
+
     Route::delete('categories/{category_id}/forcedelete', [CategoriesController::class, 'forcedelete'])->name('categories.forcedelete');
+    
     Route::get('categories/trash', [CategoriesController::class, 'trash'])->name('categories.trash');
 
     Route::resource('categories', CategoriesController::class)->names([

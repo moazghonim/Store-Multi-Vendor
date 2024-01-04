@@ -22,10 +22,12 @@ class Product extends Model
         'image',
         'price',
         'compare_price',
+        'quantity',
         'options',
         'rating',
         'featured',
         'status',
+
     ];
 
 
