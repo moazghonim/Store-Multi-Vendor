@@ -2,13 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
-use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class UpdateuserLastActiveAt
+class MarkNotificationAsRead
 {
     /**
      * Handle an incoming request.
@@ -19,11 +16,15 @@ class UpdateuserLastActiveAt
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = $request->user();
-        if ($user instanceof User) {
-            $user->forceFill([
-                'last_active_at' => Carbon::now()
-            ])->save();
+        $notification_id = $request->query('notification_id');
+        if($notification_id) {
+            $user = $request->user();
+            if ($user) {
+                $notification = $user->unreadNotifications()->find($notification_id);
+                if ($notification) {
+                    $notification->markAsRead();
+                }
+            }
         }
         return $next($request);
     }

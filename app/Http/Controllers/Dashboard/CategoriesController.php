@@ -67,7 +67,7 @@ class CategoriesController extends Controller
         $data['image'] = $this->uploadimage($request);
 
         $catrgory = Category::create($data);
-        return redirect()->route('categories')
+        return redirect()->route('dashboard.categories.index')
             ->with('success', 'Category Created');
     }
 
@@ -129,7 +129,7 @@ class CategoriesController extends Controller
             Storage::disk('public')->delete($old_image);
         }
 
-        return redirect()->route('categories')
+        return redirect()->route('dashboard.categories.index')
             ->with('success', 'Category Updated');
     }
 

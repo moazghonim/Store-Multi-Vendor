@@ -1,28 +1,9 @@
 <x-front-layout>
-    {{--
-    <x-slot:breadcrumb>
-        <div class="breadcrumbs">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <div class="breadcrumbs-content">
-                            <h1 class="page-title">Home</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-12">
-                        <ul class="breadcrumb-nav">
-                            <li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
-                            <li>Login</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </x-slot>
-        --}}
     <!-- Start Hero Area -->
     <section class="hero-area">
         <div class="container">
+            <x-alert type="info" />
+
             <div class="row">
                 <div class="col-lg-8 col-12 custom-padding-right">
                     <div class="slider-head">
@@ -34,8 +15,7 @@
                                     <h2><span>No restocking fee ($35 savings)</span>
                                         M75 Sport Watch
                                     </h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
-                                        incididunt ut
+                                    <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
                                         labore dolore magna aliqua.</p>
                                     <h3><span>Now Only</span> $320.99</h3>
                                     <div class="button">
@@ -50,8 +30,7 @@
                                     <h2><span>Big Sale Offer</span>
                                         Get the Best Deal on CCTV Camera
                                     </h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor
-                                        incididunt ut
+                                    <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
                                         labore dolore magna aliqua.</p>
                                     <h3><span>Combo Only:</span> $590.00</h3>
                                     <div class="button">
@@ -297,8 +276,7 @@
                                 <div class="product-image">
                                     <img src="https://via.placeholder.com/335x335" alt="#">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add
-                                            to
+                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
                                             Cart</a>
                                     </div>
                                 </div>
@@ -328,8 +306,7 @@
                                 <div class="product-image">
                                     <img src="https://via.placeholder.com/335x335" alt="#">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add
-                                            to
+                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
                                             Cart</a>
                                     </div>
                                 </div>
@@ -359,8 +336,7 @@
                                 <div class="product-image">
                                     <img src="https://via.placeholder.com/335x335" alt="#">
                                     <div class="button">
-                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add
-                                            to
+                                        <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
                                             Cart</a>
                                     </div>
                                 </div>
@@ -421,8 +397,7 @@
                                 <span>$200.00</span>
                                 <span class="discount-price">$400.00</span>
                             </div>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry incididunt
-                                ut
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry incididunt ut
                                 eiusmod tempor labores.</p>
                         </div>
                         <div class="box-head">
@@ -696,8 +671,7 @@
                         <div class="blog-content">
                             <a class="category" href="javascript:void(0)">Electronic</a>
                             <h4>
-                                <a href="blog-single-sidebar.html">Electronics, instrumentation & control
-                                    engineering
+                                <a href="blog-single-sidebar.html">Electronics, instrumentation & control engineering
                                 </a>
                             </h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -761,8 +735,9 @@
             </ul>
         </div>
     </section>
-    @push('script')
     <!-- End Shipping Info -->
+
+    @push('scripts')
     <script type="text/javascript">
         //========= Hero Slider
         tns({
@@ -831,11 +806,9 @@
             document.querySelector('#seconds').textContent = seconds;
 
         }
-
-
-
         timer();
         setInterval(timer, 1000);
     </script>
     @endpush
+
 </x-front-layout>

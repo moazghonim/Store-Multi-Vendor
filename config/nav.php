@@ -4,30 +4,30 @@ return [
     [
 
         'icon' => 'nav-icon fas fa-tachometer-alt',
-        'route' => 'dashboard',
+        'route' => 'dashboard.dashboard',
         'title' => 'Dashboard',
-        'active' => 'dashboard',
+        'active' => 'dashboard.dashboard',
     ],
 
     [
         'icon' => 'far fa-circle nav-icon',
-        'route' => 'categories',
+        'route' => 'dashboard.categories.index',
         'title' => 'Categories',
         'badge' => 'new',
-        'active' => 'categories.*',
+        'active' => 'dashboard.categories.*',
     ],
 
     [
         'icon' => 'far fa-circle nav-icon',
-        'route' => 'products',
+        'route' => 'dashboard.products.index',
         'title' => 'Products',
-        'active' => 'products.*',
+        'active' => 'dashboard.products.*',
     ],
 
     [
         'icon' => 'far fa-circle nav-icon',
-        'route' => 'orders',
+        'route' => 'dashboard.orders.index',
         'title' => 'Orders',
-        'active' => 'orders.*',
+        'active' => 'dashboard.orders.*',
     ]
 ];
