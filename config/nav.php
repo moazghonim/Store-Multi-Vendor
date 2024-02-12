@@ -10,24 +10,50 @@ return [
     ],
 
     [
-        'icon' => 'far fa-circle nav-icon',
+        'icon' => 'fas fa-tags nav-icon',
         'route' => 'dashboard.categories.index',
         'title' => 'Categories',
         'badge' => 'new',
         'active' => 'dashboard.categories.*',
+        'ability' => 'categories.index',
     ],
 
     [
-        'icon' => 'far fa-circle nav-icon',
+        'icon' => 'fas fa-box nav-icon',
         'route' => 'dashboard.products.index',
         'title' => 'Products',
         'active' => 'dashboard.products.*',
+        'ability' => 'products.index',
     ],
 
     [
-        'icon' => 'far fa-circle nav-icon',
+        'icon' => 'fas fa-receipt nav-icon',
         'route' => 'dashboard.orders.index',
         'title' => 'Orders',
         'active' => 'dashboard.orders.*',
-    ]
+        'ability' => 'orders.index',
+    ],
+    [
+        'icon' => 'fas fa-shield nav-icon',
+        'route' => 'dashboard.roles.index',
+        'title' => 'Roles',
+        'active' => 'dashboard.roles.*',
+        'ability' => 'roles.index',
+    ],
+
+    [
+        'icon' => 'fas fa-users nav-icon',
+        'route' => 'dashboard.users.index',
+        'title' => 'Users',
+        'active' => 'dashboard.users.*',
+        'ability' => 'users.index',
+    ],
+
+    [
+        'icon' => 'fas fa-users nav-icon',
+        'route' => 'dashboard.admins.index',
+        'title' => 'Admins',
+        'active' => 'dashboard.amins.*',
+        'ability' => 'admins.index',
+    ],
 ];

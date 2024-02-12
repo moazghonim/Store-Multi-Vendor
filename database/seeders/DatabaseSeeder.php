@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Admin::factory(3)->create();
-        // Category::factory(5)->create();
-        // Store::factory(5)->create();
-        // Product::factory(100)->create();
-        // $this->call(UserSeeder::class);
+        Category::factory(5)->create();
+        Store::factory(5)->create();
+        Product::factory(100)->create();
+        $this->call(UserSeeder::class);
     }
 }

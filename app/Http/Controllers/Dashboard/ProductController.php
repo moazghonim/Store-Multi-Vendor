@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\ImportProducts;
+use App\Jobs\ImportProucts;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Tag;
@@ -22,7 +23,7 @@ class ProductController extends Controller
     public function index()
     {
 
-
+        $this->authorize('viewAny', Product::class);
         $products = Product::with(['category', 'store'])->paginate();
         // SELECT * FROM products
         // SELECT * FROM categories WHERE id IN (..)
@@ -38,6 +39,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Product::class);
         return view('dashboard.categories.create');
     }
 
@@ -49,6 +51,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Product::class);
         Product::create($request->all());
         return redirect()->route('products');
     }
@@ -61,8 +64,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        // $product = Product::findOrFail($id);
-        // $this->authorize('view', $product);
+
+        $product = Product::findOrFail($id);
+        $this->authorize('view', $product);
     }
 
     /**
@@ -74,7 +78,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        // $this->authorize('update', $product);
+        $this->authorize('update', $product);
 
         $tags = implode(',', $product->tags()->pluck('name')->toArray());
 
@@ -90,8 +94,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        // $this->authorize('update', $product);
-
+        $this->authorize('update', $product);
         $product->update($request->except('tags'));
         $tags = explode(',', $request->tags);
         $tag_ids = [];
@@ -140,7 +143,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+
         $product = Product::findOrFail($id);
-        // $this->authorize('delete', $product);
+        $this->authorize('delete', $product);
     }
+
 }

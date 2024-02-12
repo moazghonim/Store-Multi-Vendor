@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Gate;
 
 class CategoriesController extends Controller
 {
@@ -17,6 +18,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
+
+        Gate::authorize('categories.index');
         $request = request();
         $categories = Category::with('parent')
             // LeftJoin('categories as parents', 'parents.id', 'categories.parent_id')
@@ -44,6 +47,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
+        Gate::authorize('categories.create');
         $parents = Category::get();
         $category = new Category();
         return view('dashboard.categories.create', compact('parents', 'category'));
@@ -57,8 +61,8 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('categories.create');
         $request->validate(Category::rules());
-
         $request->merge([
             'slug' => str::slug($request->post('name'))
         ]);
@@ -79,6 +83,7 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
+        Gate::authorize('categories.index');
         $category = Category::find($id);
         return view('dashboard.categories.show', compact('category'));
     }
@@ -91,6 +96,7 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
+        Gate::authorize('categories.update');
         $category =  Category::findOrFail($id);
         $parents  =  Category::where('id', '!=', $id)
             ->where(function ($query) use ($id) {
@@ -111,6 +117,7 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
 
+        Gate::authorize('categories.update');
         $request->validate(Category::rules($id));
 
         $category = Category::findOrFail($id);
@@ -141,7 +148,7 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-
+        Gate::authorize('categories.delete');
         $category = Category::findOrFail($id);
         $category->delete();
         return redirect()->route('categories')

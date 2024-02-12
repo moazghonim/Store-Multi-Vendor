@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Auth;
 
 
 class nav extends Component
@@ -16,7 +17,7 @@ class nav extends Component
      */
     public function __construct()
     {
-        $this->items = config('nav');
+        $this->items = $this->prepareitems(config('nav'));
     }
 
     /**
@@ -27,5 +28,18 @@ class nav extends Component
     public function render()
     {
         return view('components.nav');
+    }
+
+
+    public function prepareitems($items)
+    {
+        $user = Auth::user();
+        foreach($items as $key => $item) {
+            if(isset($item['ability']) && !$user->can($item['ability'])) {
+                unset($items[$key]);
+            }
+        }
+        return $items;
+
     }
 }

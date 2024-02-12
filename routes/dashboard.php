@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AdminsController;
 use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\ImportProductsController;
 use App\Http\Controllers\Dashboard\Ordercontroller;
 use App\Http\Controllers\Dashboard\Productcontroller;
 use App\Http\Controllers\Dashboard\profileController;
+use App\Http\Controllers\Dashboard\RolesController;
+use App\Http\Controllers\Dashboard\UsersController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,7 +32,18 @@ Route::group([
 
     Route::resource('categories', CategoriesController::class);
 
+    Route::get('products/import', [ImportProductsController::class, 'create']);
+    Route::post('products/import', [ImportProductsController::class, 'store'])->name('products.import');
+
     Route::resource('products', Productcontroller::class);
 
     Route::resource('orders', Ordercontroller::class);
+
+    Route::resource('roles', RolesController::class);
+
+    Route::resource('admins', AdminsController::class);
+
+    Route::resource('users', UsersController::class);
+
+
 });

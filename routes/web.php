@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\front\auth\TwoFactorAuthenticationController;
 use App\Http\Controllers\Front\CartController;
 use App\Http\Controllers\Front\CheckoutController;
+use App\Http\Controllers\Front\CurrencyConverterController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Services\CurrencyConverter;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +29,8 @@ Route::resource('cart', CartController::class);
 Route::delete('/cart/empty', [CartController::class, 'emptyCart'])->name('cart.empty');
 Route::get('checkout', [CheckoutController::class, 'create'])->name('checkout.create');
 Route::post('checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/auth/user/2fa', [TwoFactorAuthenticationController::class, 'index'])->name('auth.two-factor');
+Route::post('currency', [CurrencyConverterController::class, 'store'])->name('currency');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -50,14 +50,17 @@
                             <ul class="menu-top-link">
                                 <li>
                                     <div class="select-position">
-                                        <select id="select4">
-                                            <option value="0" selected>$ USD</option>
-                                            <option value="1">€ EURO</option>
-                                            <option value="2">$ CAD</option>
-                                            <option value="3">₹ INR</option>
-                                            <option value="4">¥ CNY</option>
-                                            <option value="5">৳ BDT</option>
-                                        </select>
+                                        <form action="{{ route('currency') }}" method="post">
+                                            @csrf
+                                            <select name="currency_code" onchange="this.form.submit()">
+                                                <option value="USD" @selected('USD' == session('currency_code'))>$ USD</option>
+                                                <option value="EURO" @selected('EURO' == session('currency_code'))>€ EURO</option>
+                                                <option value="EGP" @selected('EGP' == session('currency_code'))>$ EGP</option>
+                                                <option value="JOD" @selected('JOD' == session('currency_code'))>₹ JOD</option>
+                                                <option value="SAR" @selected('SAR' == session('currency_code'))>¥ SAR</option>
+                                                <option value="QAR"@selected('QAR' == session('currency_code'))>৳ QAR</option>
+                                            </select>
+                                        </form>
                                     </div>
                                 </li>
                                 <li>
@@ -87,35 +90,35 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-12">
                         @auth('web')
-                            <div class="top-end">
-                                <div class="user">
-                                    <i class="lni lni-user"></i>
-                                    {{Auth::guard('web')->user()->name}}
-                                </div>
-                                <ul class="user-login">
-                                    <li>
-                                        <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout').submit()">Sign Out</a>
-                                    </li>
-                                    <form action="{{route('logout')}}" id="logout" method="POST" style="display: none;">
-                                      @csrf
-                                    </form>
-                                </ul>
+                        <div class="top-end">
+                            <div class="user">
+                                <i class="lni lni-user"></i>
+                                {{Auth::guard('web')->user()->name}}
                             </div>
+                            <ul class="user-login">
+                                <li>
+                                    <a href="{{route('logout')}}" onclick="event.preventDefault();document.getElementById('logout').submit()">Sign Out</a>
+                                </li>
+                                <form action="{{route('logout')}}" id="logout" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </ul>
+                        </div>
                         @else
-                            <div class="top-end">
-                                <div class="user">
-                                    <i class="lni lni-user"></i>
-                                    Hello
-                                </div>
-                                <ul class="user-login">
-                                    <li>
-                                        <a href="{{route('login')}}">Sign In</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{route('register')}}">Register</a>
-                                    </li>
-                                </ul>
+                        <div class="top-end">
+                            <div class="user">
+                                <i class="lni lni-user"></i>
+                                Hello
                             </div>
+                            <ul class="user-login">
+                                <li>
+                                    <a href="{{route('login')}}">Sign In</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('register')}}">Register</a>
+                                </li>
+                            </ul>
+                        </div>
                         @endauth
 
                     </div>

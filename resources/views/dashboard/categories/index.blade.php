@@ -13,8 +13,11 @@
 
 
 <div class="mb-5">
-    <a href="{{ route('categories.create') }}" class="btn-btn-sm btn-outline-primary">Create</a>
-    <a href="{{ route('categories.trash') }}" class="btn-btn-sm btn-outline-dark">Trash</a>
+    @can('categories.create')
+        <a href="{{ route('dashboard.categories.create') }}" class="btn-btn-sm btn-outline-primary">Create</a>
+    @endcan
+
+    <a href="{{ route('dashboard.categories.trash') }}" class="btn-btn-sm btn-outline-dark">Trash</a>
 </div>
 
 <x-alert type="success" />
@@ -48,21 +51,25 @@
         <tr>
             <td> <img src="{{ asset('storage/'.$category->image) }}" alt="" height="50"></td>
             <td>{{ $category->id }}</td>
-            <td> <a href="{{route('categories.show',$category->id)}}">{{ $category->name }}</a></td>
+            <td> <a href="{{route('dashboard.categories.show',$category->id)}}">{{ $category->name }}</a></td>
             <td>{{ $category->parent->name }}</td>
             <td>{{ $category->products_count }}</td>
             <td>{{$category->status}}</td>
             <td>{{ $category->created_at }}</td>
             <td>
-                <a href="{{route('categories.edit',$category->id)}}" class="btn-btn-sm btn-outline-success">Edit</a>
+                @can('categories.update')
+                <a href="{{route('dashboard.categories.edit',$category->id)}}" class="btn-btn-sm btn-outline-success">Edit</a>
+                @endcan
             </td>
             <td>
-                <form action="{{route('categories.destroy',$category->id)}}" method="POST">
+                @can('categories.delete')
+                <form action="{{route('dashboard.categories.destroy',$category->id)}}" method="POST">
                     @csrf
                     <input type="hidden" name="-method" value="delete">
                     @method('delete')
                     <button type="submit" class="btn-btn-sm btn-outline-danger">Delete</button>
                 </form>
+                @endcan
             </td>
         </tr>
         @empty
